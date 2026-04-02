@@ -183,6 +183,7 @@
   --toggle-bg-on: #1890ff;
   --toggle-bg-off: #bfbfbf;
   --text-secondary: #848388;
+  --text-placeholder: #707176;
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: var(--text-body-sm-line-height);
