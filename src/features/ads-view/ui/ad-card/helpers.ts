@@ -6,6 +6,6 @@ export const CATEGORY_LABEL: Record<ItemCategories, string> = {
   [ItemCategories.RealEstate]: 'Недвижимость',
 };
 
-export function formatPrice(price: number): string {
+export const formatPrice = (price: number): string => {
   return `${price.toLocaleString('ru-RU')} ₽`;
-}
+};

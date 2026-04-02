@@ -9,7 +9,7 @@ const mockItem = {
   needsRevision: true,
 };
 
-export function AdsListPage() {
+export const AdsListPage = () => {
   return (
     <div className="p-6">
       <div className="max-w-xs">
@@ -18,4 +18,4 @@ export function AdsListPage() {
       </div>
     </div>
   );
-}
+};
