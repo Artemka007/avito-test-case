@@ -21,35 +21,35 @@ export type GetItemsSortDirection = 'asc' | 'desc';
  * @example
  * GET /items?q=iPhone&limit=10&skip=0&needsRevision=true&categories=electronics,auto&sortColumn=createdAt&sortDirection=desc
  */
-export type GetItemsQuery = {
+export type GetItemsQuery = Partial<{
   /** Строка поиска по названию объявления */
-  q?: string;
+  q: string;
 
   /** Максимальное число объявлений в ответе (для пагинации) */
-  limit?: number;
+  limit: number;
 
   /** Количество пропускаемых объявлений (для пагинации) */
-  skip?: number;
+  skip: number;
 
   /**
    * Фильтр по статусу доработки.
    * Передаётся только значение `true` — иного варианта API не принимает.
    */
-  needsRevision?: true;
+  needsRevision: true;
 
   /**
    * Фильтр по категориям.
    * Несколько значений разделяются запятой (серверное ожидание — строка).
    * @example 'auto,electronics'
    */
-  categories?: string;
+  categories: string;
 
   /** Поле, по которому производится сортировка */
-  sortColumn?: GetItemsSortColumn;
+  sortColumn: GetItemsSortColumn;
 
   /** Порядок сортировки */
-  sortDirection?: GetItemsSortDirection;
-};
+  sortDirection: GetItemsSortDirection;
+}>;
 
 /**
  * Один элемент в списке объявлений.
