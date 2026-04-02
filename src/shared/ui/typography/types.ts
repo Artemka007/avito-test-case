@@ -1,0 +1,19 @@
+import type { ComponentPropsWithoutRef, ElementType } from 'react';
+
+export type TypographyVariant =
+  | 'title-large'
+  | 'body-regular'
+  | 'body-sm'
+  | 'body-md-strong'
+  | 'label'
+  | 'body'
+  | 'body-strong'
+  | 'h5';
+
+type TypographyOwnProps = {
+  variant?: TypographyVariant;
+  as?: ElementType;
+};
+
+export type TypographyProps = TypographyOwnProps &
+  Omit<ComponentPropsWithoutRef<'p'>, keyof TypographyOwnProps>;

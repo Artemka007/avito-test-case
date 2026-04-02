@@ -5,6 +5,16 @@
   --font-sans: 'Roboto', 'Segoe UI', sans-serif;
   --font-inter: 'Inter', 'Segoe UI', sans-serif;
 
+  --radius-none: 0;
+  --radius-xss: 0.25rem; /* 4px */
+  --radius-xs: 0.375rem; /* 6px */
+  --radius-sm: 0.5rem; /* 8px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-xl: 1.5rem; /* 24px */
+  --radius-2xl: 2rem; /* 32px */
+  --radius-full: 9999px;
+
   /* Title Large — Roboto Medium 500 */
   --text-title-large-family: var(--font-sans);
   --text-title-large-weight: 500;
@@ -39,6 +49,91 @@
   --text-label-size: 14px;
   --text-label-line-height: 22px;
   --text-label-tracking: 0;
+
+  /* Body/regular — Roboto Regular 400, 16px, 140% */
+  --text-body-family: var(--font-sans);
+  --text-body-weight: 400;
+  --text-body-size: 14px;
+  --text-body-line-height: 140%;
+  --text-body-tracking: 0;
+
+  /* Body/strong (Semi Bold) — Roboto SemiBold 600, 16px, 140% */
+  --text-body-strong-family: var(--font-sans);
+  --text-body-strong-weight: 600;
+  --text-body-strong-size: 16px;
+  --text-body-strong-line-height: 140%;
+  --text-body-strong-tracking: 0;
+
+  /* H5/regular = Body/regular — Roboto 400, 16px, 140% */
+  --text-h5-family: var(--font-sans);
+  --text-h5-weight: 400;
+  --text-h5-size: 16px;
+  --text-h5-line-height: 140%;
+  --text-h5-tracking: 0;
+}
+
+@utility font-body {
+  font-family: var(--text-body-family);
+  font-weight: var(--text-body-weight);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-line-height);
+  letter-spacing: var(--text-body-tracking);
+}
+
+@utility font-body-strong {
+  font-family: var(--text-body-strong-family);
+  font-weight: var(--text-body-strong-weight);
+  font-size: var(--text-body-strong-size);
+  line-height: var(--text-body-strong-line-height);
+  letter-spacing: var(--text-body-strong-tracking);
+}
+
+@utility font-h5 {
+  font-family: var(--text-h5-family);
+  font-weight: var(--text-h5-weight);
+  font-size: var(--text-h5-size);
+  line-height: var(--text-h5-line-height);
+  letter-spacing: var(--text-h5-tracking);
+}
+
+@utility font-label {
+  font-family: var(--text-label-family);
+  font-weight: var(--text-label-weight);
+  font-size: var(--text-label-size);
+  line-height: var(--text-label-line-height);
+  letter-spacing: var(--text-label-tracking);
+}
+
+@utility font-body-regular {
+  font-family: var(--text-body-regular-family);
+  font-weight: var(--text-body-regular-weight);
+  font-size: var(--text-body-regular-size);
+  line-height: var(--text-body-regular-line-height);
+  letter-spacing: var(--text-body-regular-tracking);
+}
+
+@utility font-body-sm {
+  font-family: var(--text-body-sm-family);
+  font-weight: var(--text-body-sm-weight);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-tracking);
+}
+
+@utility font-body-md-strong {
+  font-family: var(--text-body-md-strong-family);
+  font-weight: var(--text-body-md-strong-weight);
+  font-size: var(--text-body-md-strong-size);
+  line-height: var(--text-body-md-strong-line-height);
+  letter-spacing: var(--text-body-md-strong-tracking);
+}
+
+@utility font-title-large {
+  font-family: var(--text-title-large-family);
+  font-weight: var(--text-title-large-weight);
+  font-size: var(--text-title-large-size);
+  line-height: var(--text-title-large-line-height);
+  letter-spacing: var(--text-title-large-tracking);
 }
 
 :root {
@@ -50,8 +145,11 @@
   --text-muted: #475569;
   --accent: #0f8ff0;
   --accent-strong: #0b74c6;
-  --warning-bg: #fff3c4;
-  --warning-text: #8a5a00;
+  --warning-bg: #f9f1e6;
+  --warning-text: #faad14;
+  --overlay-bg: #000000d9;
+  --char-title: #000000d9;
+  --char-secondary: #00000073;
   font-family: var(--font-sans);
   font-size: var(--text-body-sm-size);
   line-height: var(--text-body-sm-line-height);
@@ -70,8 +168,8 @@
   --text-muted: #9fb0cb;
   --accent: #46b4ff;
   --accent-strong: #7dd3fc;
-  --warning-bg: rgba(250, 204, 21, 0.18);
-  --warning-text: #fde68a;
+  --warning-bg: #faad14;
+  --warning-text: #f9f1e6;
 }
 
 * {
