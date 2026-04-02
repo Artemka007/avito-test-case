@@ -4,11 +4,13 @@ export type TypographyVariant =
   | 'title-large'
   | 'body-regular'
   | 'body-sm'
+  | 'body-sm-strong'
   | 'body-md-strong'
   | 'label'
   | 'body'
   | 'body-strong'
-  | 'h5';
+  | 'h5'
+  | 'h5-medium';
 
 type TypographyOwnProps = {
   variant?: TypographyVariant;
