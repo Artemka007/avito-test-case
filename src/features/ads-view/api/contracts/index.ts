@@ -5,3 +5,5 @@ export type {
   GetItemsResponseItem,
   GetItemsResponse,
 } from './get-items';
+
+export { getItems } from '../get-items';
