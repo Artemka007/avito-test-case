@@ -1,8 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-sans: 'Roboto', 'Segoe UI', sans-serif;
+  --font-inter: 'Inter', 'Segoe UI', sans-serif;
+
+  /* Title Large — Roboto Medium 500 */
+  --text-title-large-family: var(--font-sans);
+  --text-title-large-weight: 500;
+  --text-title-large-size: 22px;
+  --text-title-large-line-height: 28px;
+  --text-title-large-tracking: 0;
+
+  /* Body Regular — Inter 400, 18px */
+  --text-body-regular-family: var(--font-inter);
+  --text-body-regular-weight: 400;
+  --text-body-regular-size: 18px;
+  --text-body-regular-line-height: 1;
+  --text-body-regular-tracking: 0;
+
+  /* Body Small — Roboto Regular 400, 14px */
+  --text-body-sm-family: var(--font-sans);
+  --text-body-sm-weight: 400;
+  --text-body-sm-size: 14px;
+  --text-body-sm-line-height: 22px;
+  --text-body-sm-tracking: 0;
+
+  /* Body Medium Strong — Roboto Medium 500, 16px */
+  --text-body-md-strong-family: var(--font-sans);
+  --text-body-md-strong-weight: 500;
+  --text-body-md-strong-size: 16px;
+  --text-body-md-strong-line-height: 24px;
+  --text-body-md-strong-tracking: 0;
+
+  /* Label — Roboto Medium 500, 14px */
+  --text-label-family: var(--font-sans);
+  --text-label-weight: 500;
+  --text-label-size: 14px;
+  --text-label-line-height: 22px;
+  --text-label-tracking: 0;
 }
 
 :root {
@@ -17,6 +53,8 @@
   --warning-bg: #fff3c4;
   --warning-text: #8a5a00;
   font-family: var(--font-sans);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line-height);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
