@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useReducer } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { fetchReducer, initialFetchState } from '@/shared/lib/fetch-reducer';
 import { getItems } from '../api';
 import { setItems, setTotal } from '../store';
 import {
@@ -38,23 +39,6 @@ type UseAdsItemsResult = {
   error: string | null;
 };
 
-type FetchState = { loading: boolean; error: string | null };
-type FetchAction =
-  | { type: 'fetch' }
-  | { type: 'success' }
-  | { type: 'error'; message: string };
-
-const fetchReducer = (_: FetchState, action: FetchAction): FetchState => {
-  switch (action.type) {
-    case 'fetch':
-      return { loading: true, error: null };
-    case 'success':
-      return { loading: false, error: null };
-    case 'error':
-      return { loading: false, error: action.message };
-  }
-};
-
 /**
  * Хук обеспечивающий агрегацию данных для отображения списка объявлений,
  * а также логику загрузки данных с сервера при изменении параметров отображения.
@@ -72,10 +56,10 @@ export const useAdsItems = (): UseAdsItemsResult => {
   const filter = useAppSelector(selectFilter);
   const items = useAppSelector(selectItems);
 
-  const [{ loading, error }, fetchDispatch] = useReducer(fetchReducer, {
-    loading: false,
-    error: null,
-  });
+  const [{ loading, error }, fetchDispatch] = useReducer(
+    fetchReducer,
+    initialFetchState,
+  );
 
   const variant = useMemo(
     () => (itemsView === ItemsView.Grid ? 'grid' : 'list') as 'grid' | 'list',

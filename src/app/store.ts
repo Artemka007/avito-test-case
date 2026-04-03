@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { preferencesReducer } from '@/features/preferences/preferences-slice';
 import { adsViewReducer } from '@/features/ads-view/store';
+import { adViewReducer } from '@/features/ad-view/store';
 
 const PREFERENCES_STORAGE_KEY = 'avito.preferences';
 
@@ -9,6 +10,7 @@ export const store = configureStore({
   reducer: {
     preferences: preferencesReducer,
     adsView: adsViewReducer,
+    adView: adViewReducer,
   },
 });
 

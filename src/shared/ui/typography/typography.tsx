@@ -6,6 +6,7 @@ import type { TypographyProps, TypographyVariant } from './types';
 
 const VARIANT_CLASS: Record<TypographyVariant, string> = {
   'title-large': 'font-title-large',
+  'title-h2': 'font-title-h2',
   'page-subtitle': 'font-page-subtitle',
   'body-regular': 'font-body-regular',
   'body-sm': 'font-body-sm',
@@ -20,6 +21,7 @@ const VARIANT_CLASS: Record<TypographyVariant, string> = {
 
 const VARIANT_ELEMENT: Record<TypographyVariant, ElementType> = {
   'title-large': 'p',
+  'title-h2': 'h2',
   'page-subtitle': 'p',
   'body-regular': 'p',
   'body-sm': 'span',
