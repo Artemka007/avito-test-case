@@ -1,6 +1,10 @@
 export { Chevron } from './chevron';
+export { ClearIcon } from './clear-icon';
+export { ErrorCircleIcon } from './error-circle-icon';
 export { GridViewIcon } from './grid-view-icon';
+export { LightbulbIcon } from './lightbulb-icon';
 export { ListViewIcon } from './list-view-icon';
 export { SearchIcon } from './search-icon';
 export { PenIcon } from './pen-icon';
+export { SuccessIcon } from './success-icon';
 export { WarningIcon } from './warning-icon';
