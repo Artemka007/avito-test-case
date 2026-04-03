@@ -9,6 +9,8 @@ export type State = {
   sortOption: SortOptions;
   itemsView: ItemsView;
   query: string;
+  currentPage: number;
+  itemsPerPage: number;
 };
 
 const initialFilter: Filter = {
@@ -26,6 +28,8 @@ const initialState: State = {
   sortOption: SortOptions.DateDesc,
   itemsView: ItemsView.Grid,
   query: '',
+  currentPage: 1,
+  itemsPerPage: 10,
 };
 
 export const adsViewSlice = createSlice({
@@ -57,6 +61,13 @@ export const adsViewSlice = createSlice({
       const category = action.payload;
       state.filter.categories[category] = !state.filter.categories[category];
     },
+    setPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
+    setItemsPerPage(state, action: PayloadAction<number>) {
+      state.itemsPerPage = action.payload;
+      state.currentPage = 1;
+    },
   },
 });
 
@@ -69,6 +80,8 @@ export const {
   resetQuery,
   toggleNeedsRevision,
   toggleFilterCategory,
+  setPage,
+  setItemsPerPage,
 } = adsViewSlice.actions;
 
 export default adsViewSlice.reducer;

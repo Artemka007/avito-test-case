@@ -1,26 +1,26 @@
-import { AdCard, AdSearch, AdsFilter } from '@/features/ads-view/ui';
-import { ItemCategories } from '@/features/ads-view/store/enums';
-
-const mockItem = {
-  id: '1',
-  title: 'iPhone 15 Pro Max 256GB, Titanium',
-  category: ItemCategories.Electronics,
-  price: 119990,
-  needsRevision: true,
-};
+import { AdsView } from '@/features/ads-view';
+import { useAppSelector } from '@/app/hooks';
+import { Typography } from '@/shared/ui';
 
 export const AdsListPage = () => {
+  const count = useAppSelector((state) => state.adsView.items.length);
+
   return (
-    <div className="flex flex-col gap-4 p-6">
-      <AdSearch />
-      <div className="flex gap-6">
-        <aside className="w-64 shrink-0">
-          <AdsFilter />
-        </aside>
-        <div className="flex max-w-xs flex-col gap-4">
-          <AdCard item={mockItem} variant="grid" />
-          <AdCard item={mockItem} variant="list" />
-        </div>
+    <div className="flex flex-col gap-1 p-8">
+      <Typography
+        variant="title-large"
+        className="px-2 text-[var(--text-title)]"
+      >
+        Мои объявления
+      </Typography>
+      <Typography
+        variant="page-subtitle"
+        className="px-2 text-[var(--text-secondary)]"
+      >
+        {count} объявлений
+      </Typography>
+      <div className="mt-3">
+        <AdsView />
       </div>
     </div>
   );

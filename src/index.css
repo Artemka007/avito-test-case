@@ -29,6 +29,13 @@
   --text-body-regular-line-height: 1;
   --text-body-regular-tracking: 0;
 
+  /* Page Subtitle — Inter Regular 400, 18px, 100% */
+  --text-page-subtitle-family: var(--font-inter);
+  --text-page-subtitle-weight: 400;
+  --text-page-subtitle-size: 18px;
+  --text-page-subtitle-line-height: 1;
+  --text-page-subtitle-tracking: 0;
+
   /* Body Small — Roboto Regular 400, 14px */
   --text-body-sm-family: var(--font-sans);
   --text-body-sm-weight: 400;
@@ -164,6 +171,14 @@
   font-size: var(--text-title-large-size);
   line-height: var(--text-title-large-line-height);
   letter-spacing: var(--text-title-large-tracking);
+}
+
+@utility font-page-subtitle {
+  font-family: var(--text-page-subtitle-family);
+  font-weight: var(--text-page-subtitle-weight);
+  font-size: var(--text-page-subtitle-size);
+  line-height: var(--text-page-subtitle-line-height);
+  letter-spacing: var(--text-page-subtitle-tracking);
 }
 
 :root {

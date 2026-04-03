@@ -7,6 +7,8 @@ export {
   changeView,
   search,
   setItems,
+  setPage,
+  setItemsPerPage,
 } from './slice';
 export { default as adsViewReducer } from './slice';
 export { ItemCategories, ItemsView, SortOptions } from './enums';

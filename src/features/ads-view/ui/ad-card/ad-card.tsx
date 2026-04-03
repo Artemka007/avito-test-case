@@ -20,7 +20,7 @@ export const AdCard: React.FC<AdCardProps> = ({
         'overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-strong)]',
         'cursor-pointer transition-shadow duration-200 hover:shadow-[0_4px_16px_-4px_rgba(15,23,42,0.12)]',
         variant === 'grid' && 'flex flex-col',
-        variant === 'list' && 'flex flex-row items-start gap-4 p-4',
+        variant === 'list' && 'flex w-full flex-row items-start gap-4 p-4',
         className,
       )}
       {...divProps}
@@ -73,7 +73,7 @@ export const AdCard: React.FC<AdCardProps> = ({
 
         {/* Needs revision badge — Body/regular */}
         {needsRevision && (
-          <div className="mt-0.5 flex h-[26px] items-center gap-2 rounded-xs bg-[var(--warning-bg)] p-0.5 p-2">
+          <span className="mt-0.5 flex h-[26px] items-center gap-2 rounded-xs bg-[var(--warning-bg)] p-0.5 p-2">
             <span
               className="block h-[0.375rem] w-[0.375rem] shrink-0 rounded-full bg-[var(--warning-text)]"
               aria-hidden="true"
@@ -85,7 +85,7 @@ export const AdCard: React.FC<AdCardProps> = ({
             >
               Требует доработок
             </Typography>
-          </div>
+          </span>
         )}
       </div>
     </div>
