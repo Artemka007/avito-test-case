@@ -34,7 +34,7 @@ export function Toggle({
         className={cn(
           'absolute top-[2px] left-[2px] h-[18px] w-[18px] rounded-[4.8125rem] bg-white transition-transform duration-200',
           'shadow-[0px_2px_4px_0px_#00230B33]',
-          checked ? 'translate-x-[16px]' : 'translate-x-0',
+          checked ? 'translate-x-[22px]' : 'translate-x-0',
         )}
       />
     </button>

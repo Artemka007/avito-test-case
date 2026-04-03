@@ -6,20 +6,22 @@ type ImagePlaceholderProps = {
   variant: AdCardVariant;
 };
 
-export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = () => {
+export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
+  variant,
+}) => {
   return (
     <div
       role="img"
       aria-label="Изображение отсутствует"
       className={cn(
-        'flex shrink-0 items-center justify-center bg-[var(--bg)] text-[var(--text-muted)]',
-        'aspect-[3/2] w-[179px]',
+        'flex shrink-0 items-center justify-center bg-[#FAFAFA] text-[var(--text-muted)]',
+        variant === 'grid' ? 'aspect-[4/3] w-full' : 'h-full w-[179px]',
       )}
     >
       <svg
         width="full"
         height="full"
-        viewBox="0 0 179 150"
+        viewBox="0 0 200 150"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
