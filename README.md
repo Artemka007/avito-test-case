@@ -52,22 +52,3 @@ Pre-commit хук запускает `lint-staged`, который прогон�
 git init
 npm run prepare
 ```
-
-## Figma MCP для VS Code
-
-В workspace уже добавлен файл `.vscode/mcp.json`.
-
-- При первом запуске VS Code попросит ввести `figma-api-key`
-- Ключ не хранится в репозитории в открытом виде
-- Сервер запускается через `npx @tmegit/figma-developer-mcp --stdio`
-
-Чтобы активировать сервер:
-
-1. Откройте Command Palette
-2. Выполните `MCP: List Servers`
-3. Найдите `figma` и запустите его
-
-## Самостоятельные решения
-
-- Для быстрого старта добавлены демо-страницы и базовый layout под задание, чтобы можно было сразу переходить к интеграции backend API и LLM.
-- Состояние темы и вида списка хранится в Redux Toolkit и сохраняется в `localStorage`.

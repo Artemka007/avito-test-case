@@ -1,3 +1,3 @@
-export function AdDetailsPage() {
+export const AdDetailsPage = () => {
   return <></>;
-}
+};
