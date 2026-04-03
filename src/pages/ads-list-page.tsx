@@ -6,7 +6,7 @@ export const AdsListPage = () => {
   const count = useAppSelector((state) => state.adsView.total);
 
   return (
-    <div className="flex flex-col gap-1 p-8">
+    <div className="flex h-screen flex-col gap-1 overflow-hidden p-8">
       <Typography
         variant="title-large"
         className="px-2 text-[var(--text-title)]"
@@ -19,7 +19,7 @@ export const AdsListPage = () => {
       >
         {count} объявлений
       </Typography>
-      <div className="mt-3">
+      <div className="mt-3 min-h-0 flex-1">
         <AdsView />
       </div>
     </div>
