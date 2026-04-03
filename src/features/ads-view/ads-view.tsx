@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { useAdsItems } from './hooks';
 import { AdCard, AdSearch, AdsFilter, Pagination } from './ui';
 
@@ -30,7 +32,13 @@ export const AdsView = () => {
                 }
               >
                 {items.map((item) => (
-                  <AdCard key={item.id} item={item} variant={variant} />
+                  <Link
+                    key={item.id}
+                    to={`/ads/${item.id}`}
+                    className="contents"
+                  >
+                    <AdCard item={item} variant={variant} />
+                  </Link>
                 ))}
               </div>
             )}

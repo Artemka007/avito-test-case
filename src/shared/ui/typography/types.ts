@@ -2,6 +2,7 @@ import type { ComponentPropsWithoutRef, ElementType } from 'react';
 
 export type TypographyVariant =
   | 'title-large'
+  | 'title-h2'
   | 'page-subtitle'
   | 'body-regular'
   | 'body-sm'
