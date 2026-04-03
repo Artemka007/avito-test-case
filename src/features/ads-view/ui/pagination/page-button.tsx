@@ -14,7 +14,7 @@ export function PageButton({
   return (
     <button
       className={cn(
-        'flex h-8 w-8 items-center justify-center rounded-lg border bg-white transition-colors select-none',
+        'flex h-8 w-8 items-center justify-center rounded-sm border bg-white transition-colors select-none',
         active
           ? 'border-[#1890FF] text-[#1890FF]'
           : 'border-[#D9D9D9] text-[var(--char-title)]',

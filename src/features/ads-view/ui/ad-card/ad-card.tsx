@@ -20,7 +20,7 @@ export const AdCard: React.FC<AdCardProps> = ({
         'overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-strong)]',
         'cursor-pointer transition-shadow duration-200 hover:shadow-[0_4px_16px_-4px_rgba(15,23,42,0.12)]',
         variant === 'grid' && 'flex flex-col',
-        variant === 'list' && 'flex w-full flex-row items-start gap-4 p-4',
+        variant === 'list' && 'flex w-full flex-row items-start gap-4',
         className,
       )}
       {...divProps}
@@ -29,8 +29,8 @@ export const AdCard: React.FC<AdCardProps> = ({
 
       <div
         className={cn(
-          'relative flex flex-col',
-          variant === 'grid' && 'mt-2 gap-1 p-4',
+          'relative flex flex-col p-4',
+          variant === 'grid' && 'mt-2 gap-1',
           variant === 'list' && 'min-w-0 flex-1 gap-1',
         )}
       >

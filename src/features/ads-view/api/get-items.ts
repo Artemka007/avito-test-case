@@ -15,9 +15,11 @@ export async function getItems(
   query: Omit<GetItemsQuery, 'categories'> & {
     categories?: GetItemsQuery['categories'];
   } = {},
+  signal?: AbortSignal,
 ): Promise<GetItemsResponse> {
   const { data } = await apiClient.get<GetItemsResponse>('/items', {
     params: query,
+    signal,
   });
 
   return data;

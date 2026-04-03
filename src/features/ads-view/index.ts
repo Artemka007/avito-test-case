@@ -10,6 +10,7 @@ export {
   adsViewReducer,
   adsViewSlice,
   setItems,
+  setTotal,
   search,
   sort,
   changeView,
@@ -18,6 +19,14 @@ export {
   toggleNeedsRevision,
   setPage,
   setItemsPerPage,
+  selectItemsView,
+  selectCurrentPage,
+  selectItemsPerPage,
+  selectTotal,
+  selectSortOption,
+  selectQuery,
+  selectFilter,
+  selectItems,
 } from './store';
 export { ItemCategories, ItemsView, SortOptions } from './store';
 

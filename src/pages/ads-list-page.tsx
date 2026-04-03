@@ -3,7 +3,7 @@ import { useAppSelector } from '@/app/hooks';
 import { Typography } from '@/shared/ui';
 
 export const AdsListPage = () => {
-  const count = useAppSelector((state) => state.adsView.items.length);
+  const count = useAppSelector((state) => state.adsView.total);
 
   return (
     <div className="flex flex-col gap-1 p-8">

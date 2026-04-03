@@ -5,6 +5,7 @@ import { ItemCategories, ItemsView, SortOptions } from './enums';
 
 export type State = {
   items: Item[];
+  total: number;
   filter: Filter;
   sortOption: SortOptions;
   itemsView: ItemsView;
@@ -24,6 +25,7 @@ const initialFilter: Filter = {
 
 const initialState: State = {
   items: [],
+  total: 0,
   filter: initialFilter,
   sortOption: SortOptions.DateDesc,
   itemsView: ItemsView.Grid,
@@ -39,27 +41,36 @@ export const adsViewSlice = createSlice({
     setItems(state, action: PayloadAction<Item[]>) {
       state.items = action.payload;
     },
+    setTotal(state, action: PayloadAction<number>) {
+      state.total = action.payload;
+    },
     sort(state, action: PayloadAction<SortOptions>) {
       state.sortOption = action.payload;
+      state.currentPage = 1;
     },
     changeView(state, action: PayloadAction<ItemsView>) {
       state.itemsView = action.payload;
     },
     search(state, action: PayloadAction<string>) {
       state.query = action.payload;
+      state.currentPage = 1;
     },
     resetFilter(state) {
       state.filter = initialFilter;
+      state.currentPage = 1;
     },
     resetQuery(state) {
       state.query = '';
+      state.currentPage = 1;
     },
     toggleNeedsRevision(state) {
       state.filter.needsRevision = !state.filter.needsRevision;
+      state.currentPage = 1;
     },
     toggleFilterCategory(state, action: PayloadAction<ItemCategories>) {
       const category = action.payload;
       state.filter.categories[category] = !state.filter.categories[category];
+      state.currentPage = 1;
     },
     setPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
@@ -73,6 +84,7 @@ export const adsViewSlice = createSlice({
 
 export const {
   setItems,
+  setTotal,
   sort,
   changeView,
   search,
