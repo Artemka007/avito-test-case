@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { ItemCategories } from '@/features/ads-view/store/enums';
 import {
   Button,
   InputSelect,
-  LightbulbIcon,
   TextArea,
   TextInput,
   Toast,
@@ -18,6 +16,8 @@ import { ElectronicsParamsForm } from '../electronics-params-form';
 import { FormField } from '../form-field';
 import { FormSection } from '../form-section';
 import { RealEstateParamsForm } from '../real-estate-params-form';
+import { AiButton, AiTooltip } from '../ai-field';
+import { useAiFields } from './use-ai-fields';
 import { useParamsField, type FormValues } from './use-params-field';
 
 const CATEGORY_OPTIONS = [
@@ -77,6 +77,21 @@ export const AdForm = ({
     description?: string;
   };
   const [toast, setToast] = useState<ToastState | null>(null);
+
+  const {
+    aiPrice,
+    aiDesc,
+    priceTooltipOpen,
+    setPriceTooltipOpen,
+    descTooltipOpen,
+    setDescTooltipOpen,
+    priceRequested,
+    descRequested,
+    handlePriceAiClick,
+    handleApplyPrice,
+    handleDescAiClick,
+    handleApplyDesc,
+  } = useAiFields({ title, category, description, setValue, trigger });
 
   useEffect(() => {
     if (saveSuccess) {
@@ -180,10 +195,29 @@ export const AdForm = ({
                   min={1}
                 />
               </FormField>
-              <Button type="button" variant="yellow" className="mb-0 shrink-0">
-                <LightbulbIcon />
-                Узнать рыночную цену
-              </Button>
+              <div className="relative mb-0 shrink-0">
+                <AiButton
+                  label="Узнать рыночную цену"
+                  state={
+                    aiPrice.loading
+                      ? 'loading'
+                      : priceRequested
+                        ? 'done'
+                        : 'idle'
+                  }
+                  onClick={() => {
+                    void handlePriceAiClick();
+                  }}
+                />
+                {priceTooltipOpen && (
+                  <AiTooltip
+                    result={aiPrice.result}
+                    error={aiPrice.error}
+                    onApply={handleApplyPrice}
+                    onClose={() => setPriceTooltipOpen(false)}
+                  />
+                )}
+              </div>
             </div>
           </FormSection>
 
@@ -215,10 +249,25 @@ export const AdForm = ({
               placeholder="Расскажите подробнее об объявлении"
               rows={5}
             />
-            <Button type="button" variant="yellow" className="mt-2">
-              <LightbulbIcon />
-              Улучшить описание
-            </Button>
+            <div className="relative mt-2 inline-block">
+              <AiButton
+                label={description ? 'Улучшить описание' : 'Придумать описание'}
+                state={
+                  aiDesc.loading ? 'loading' : descRequested ? 'done' : 'idle'
+                }
+                onClick={() => {
+                  void handleDescAiClick();
+                }}
+              />
+              {descTooltipOpen && (
+                <AiTooltip
+                  result={aiDesc.result}
+                  error={aiDesc.error}
+                  onApply={handleApplyDesc}
+                  onClose={() => setDescTooltipOpen(false)}
+                />
+              )}
+            </div>
           </FormSection>
 
           {/* ── Кнопки ── */}
