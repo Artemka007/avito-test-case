@@ -2,6 +2,8 @@
 
 Стартовый frontend-шаблон для тестового задания Авито: Vite + React + TypeScript с заранее подключенными Router, Redux Toolkit, Tailwind CSS, ESLint, Prettier, Husky и workspace-конфигом для Figma MCP.
 
+#### Я изменил бэкэнд, добавив туда айдишники на зпрос списка элементов, по-другому я бы не смог сделать переход между ними.
+
 ## Что уже настроено
 
 - React + Vite + TypeScript
@@ -11,25 +13,14 @@
 - ESLint flat config
 - Prettier + `prettier-plugin-tailwindcss`
 - Husky + `lint-staged` для pre-commit
-- `.vscode/mcp.json` для Figma MCP
 
 ## Быстрый старт
 
 ```bash
-npm install
-npm run dev
+docker build -t avito-app . && docker run -p 8000:80 avito-app
 ```
 
-Дополнительные команды:
-
-```bash
-npm run lint
-npm run lint:fix
-npm run format
-npm run format:check
-npm run typecheck
-npm run build
-```
+Приложение будет доступно на [http://localhost:8000](http://localhost:8000).
 
 ## Структура
 
