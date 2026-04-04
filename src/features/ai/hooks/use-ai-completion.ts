@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
 
-import { grokComplete } from '../api/grok-complete';
-import type { GrokCompleteOptions, GrokMessage } from '../api/types';
+import { aiComplete } from '../api/ai-complete';
+import type { AiCompleteOptions, AiMessage, AiProvider } from '../api/types';
 
-export type UseGrokCompletionReturn = {
-  /** Send messages to Grok and return the reply text */
+export type UseAiCompletionReturn = {
+  /** Send messages to the selected provider and return the reply text */
   complete: (
-    messages: GrokMessage[],
-    options?: GrokCompleteOptions,
+    messages: AiMessage[],
+    options?: AiCompleteOptions,
   ) => Promise<string>;
   /** True while a request is in-flight */
   loading: boolean;
@@ -19,20 +19,22 @@ export type UseGrokCompletionReturn = {
   reset: () => void;
 };
 
-export const useGrokCompletion = (): UseGrokCompletionReturn => {
+export const useAiCompletion = (
+  provider: AiProvider,
+): UseAiCompletionReturn => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const complete = useCallback(
     async (
-      messages: GrokMessage[],
-      options?: GrokCompleteOptions,
+      messages: AiMessage[],
+      options?: AiCompleteOptions,
     ): Promise<string> => {
       setLoading(true);
       setError(null);
       try {
-        const text = await grokComplete(messages, options);
+        const text = await aiComplete(provider, messages, options);
         setResult(text);
         return text;
       } catch (err) {
@@ -44,7 +46,7 @@ export const useGrokCompletion = (): UseGrokCompletionReturn => {
         setLoading(false);
       }
     },
-    [],
+    [provider],
   );
 
   const reset = useCallback(() => {

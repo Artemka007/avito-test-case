@@ -1,15 +1,10 @@
 import type { AiCompleteOptions, AiCompleteResponse, AiMessage } from './types';
 
-const GROK_BASE_URL = 'https://api.x.ai/v1';
-const DEFAULT_MODEL = 'grok-3-latest';
+const OLLAMA_BASE_URL =
+  import.meta.env.VITE_OLLAMA_BASE_URL ?? 'http://localhost:11434';
+const DEFAULT_MODEL = import.meta.env.VITE_OLLAMA_MODEL ?? 'qwen2.5:3b';
 
-const getApiKey = (): string => {
-  const key = import.meta.env.VITE_GROK_API_KEY as string | undefined;
-  if (!key) throw new Error('VITE_GROK_API_KEY is not set');
-  return key;
-};
-
-export const grokComplete = async (
+export const ollamaComplete = async (
   messages: AiMessage[],
   options: AiCompleteOptions = {},
 ): Promise<string> => {
@@ -24,23 +19,21 @@ export const grokComplete = async (
     ? [{ role: 'system', content: systemPrompt }, ...messages]
     : messages;
 
-  const response = await fetch(`${GROK_BASE_URL}/chat/completions`, {
+  const response = await fetch(`${OLLAMA_BASE_URL}/v1/chat/completions`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${getApiKey()}`,
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model,
       messages: allMessages,
       temperature,
+      stream: false,
       ...(maxTokens ? { max_tokens: maxTokens } : {}),
     }),
   });
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`Grok API error ${response.status}: ${text}`);
+    throw new Error(`Ollama error ${response.status}: ${text}`);
   }
 
   const data = (await response.json()) as AiCompleteResponse;

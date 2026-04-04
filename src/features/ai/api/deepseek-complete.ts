@@ -1,15 +1,15 @@
 import type { AiCompleteOptions, AiCompleteResponse, AiMessage } from './types';
 
-const GROK_BASE_URL = 'https://api.x.ai/v1';
-const DEFAULT_MODEL = 'grok-3-latest';
+const DEEPSEEK_BASE_URL = 'https://api.deepseek.com';
+const DEFAULT_MODEL = 'deepseek-chat';
 
 const getApiKey = (): string => {
-  const key = import.meta.env.VITE_GROK_API_KEY as string | undefined;
-  if (!key) throw new Error('VITE_GROK_API_KEY is not set');
+  const key = import.meta.env.VITE_DEEPSEEK_API_KEY as string | undefined;
+  if (!key) throw new Error('VITE_DEEPSEEK_API_KEY is not set');
   return key;
 };
 
-export const grokComplete = async (
+export const deepseekComplete = async (
   messages: AiMessage[],
   options: AiCompleteOptions = {},
 ): Promise<string> => {
@@ -24,7 +24,7 @@ export const grokComplete = async (
     ? [{ role: 'system', content: systemPrompt }, ...messages]
     : messages;
 
-  const response = await fetch(`${GROK_BASE_URL}/chat/completions`, {
+  const response = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const grokComplete = async (
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`Grok API error ${response.status}: ${text}`);
+    throw new Error(`DeepSeek API error ${response.status}: ${text}`);
   }
 
   const data = (await response.json()) as AiCompleteResponse;

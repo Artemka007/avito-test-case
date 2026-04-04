@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
-import { useGrokCompletion } from '@/features/ai';
-import type { GrokMessage } from '@/features/ai';
 import { ItemCategories } from '@/features/ads-view/store/enums';
 import {
   Button,
@@ -20,6 +17,7 @@ import { FormField } from '../form-field';
 import { FormSection } from '../form-section';
 import { RealEstateParamsForm } from '../real-estate-params-form';
 import { AiButton, AiTooltip } from '../ai-field';
+import { useAiFields } from './use-ai-fields';
 import { useParamsField, type FormValues } from './use-params-field';
 
 const CATEGORY_OPTIONS = [
@@ -80,90 +78,20 @@ export const AdForm = ({
   };
   const [toast, setToast] = useState<ToastState | null>(null);
 
-  // ── AI hooks ──────────────────────────────────────────────────────────────
-  const grokPrice = useGrokCompletion();
-  const grokDesc = useGrokCompletion();
-
-  const [priceTooltipOpen, setPriceTooltipOpen] = useState(false);
-  const [descTooltipOpen, setDescTooltipOpen] = useState(false);
-  const [priceRequested, setPriceRequested] = useState(false);
-  const [descRequested, setDescRequested] = useState(false);
-
-  const handlePriceAiClick = async () => {
-    setPriceTooltipOpen(false);
-    const messages: GrokMessage[] = [
-      {
-        role: 'system',
-        content:
-          'Ты эксперт по рыночным ценам на товары в России. Отвечай кратко — только число в рублях, без пояснений и дополнительного текста.',
-      },
-      {
-        role: 'user',
-        content: `Какова справедливая рыночная цена для объявления: "${title}"${category ? `, категория: ${category}` : ''}? Ответь только числом в рублях.`,
-      },
-    ];
-    try {
-      await grokPrice.complete(messages);
-    } catch {
-      // error is captured in grokPrice.error
-    }
-    setPriceRequested(true);
-    setPriceTooltipOpen(true);
-  };
-
-  const handleApplyPrice = () => {
-    if (grokPrice.result) {
-      const match = grokPrice.result.replace(/[\s,]/g, '').match(/\d+/);
-      if (match) {
-        setValue('price', match[0]);
-        void trigger('price');
-      }
-    }
-    setPriceTooltipOpen(false);
-  };
-
-  const handleDescAiClick = async () => {
-    setDescTooltipOpen(false);
-    const messages: GrokMessage[] = description
-      ? [
-          {
-            role: 'system',
-            content:
-              'Ты помогаешь улучшать описания объявлений на Авито. Пиши на русском языке кратко и информативно.',
-          },
-          {
-            role: 'user',
-            content: `Улучши описание объявления "${title}" (категория: ${category}): "${description}". Максимум 300 символов.`,
-          },
-        ]
-      : [
-          {
-            role: 'system',
-            content:
-              'Ты помогаешь писать описания для объявлений на Авито. Пиши на русском языке кратко и информативно.',
-          },
-          {
-            role: 'user',
-            content: `Напиши описание для объявления "${title}" (категория: ${category}). Максимум 300 символов.`,
-          },
-        ];
-    try {
-      await grokDesc.complete(messages);
-    } catch {
-      // error is captured in grokDesc.error
-    }
-    setDescRequested(true);
-    setDescTooltipOpen(true);
-  };
-
-  const handleApplyDesc = () => {
-    if (grokDesc.result) {
-      setValue('description', grokDesc.result);
-      void trigger('description');
-    }
-    setDescTooltipOpen(false);
-  };
-  // ─────────────────────────────────────────────────────────────────────────
+  const {
+    aiPrice,
+    aiDesc,
+    priceTooltipOpen,
+    setPriceTooltipOpen,
+    descTooltipOpen,
+    setDescTooltipOpen,
+    priceRequested,
+    descRequested,
+    handlePriceAiClick,
+    handleApplyPrice,
+    handleDescAiClick,
+    handleApplyDesc,
+  } = useAiFields({ title, category, description, setValue, trigger });
 
   useEffect(() => {
     if (saveSuccess) {
@@ -271,7 +199,7 @@ export const AdForm = ({
                 <AiButton
                   label="Узнать рыночную цену"
                   state={
-                    grokPrice.loading
+                    aiPrice.loading
                       ? 'loading'
                       : priceRequested
                         ? 'done'
@@ -283,8 +211,8 @@ export const AdForm = ({
                 />
                 {priceTooltipOpen && (
                   <AiTooltip
-                    result={grokPrice.result}
-                    error={grokPrice.error}
+                    result={aiPrice.result}
+                    error={aiPrice.error}
                     onApply={handleApplyPrice}
                     onClose={() => setPriceTooltipOpen(false)}
                   />
@@ -325,7 +253,7 @@ export const AdForm = ({
               <AiButton
                 label={description ? 'Улучшить описание' : 'Придумать описание'}
                 state={
-                  grokDesc.loading ? 'loading' : descRequested ? 'done' : 'idle'
+                  aiDesc.loading ? 'loading' : descRequested ? 'done' : 'idle'
                 }
                 onClick={() => {
                   void handleDescAiClick();
@@ -333,8 +261,8 @@ export const AdForm = ({
               />
               {descTooltipOpen && (
                 <AiTooltip
-                  result={grokDesc.result}
-                  error={grokDesc.error}
+                  result={aiDesc.result}
+                  error={aiDesc.error}
                   onApply={handleApplyDesc}
                   onClose={() => setDescTooltipOpen(false)}
                 />
